@@ -1,14 +1,22 @@
 import "./App.css";
 import { TicketDetails, Tabs } from "./container/initialState";
 import MyCarousel from "./container/myCarosel";
+import BootsrapExample from "./container/bootstrapExample";
+import TicketBook from "./container/TicketBook/index";
+import store from "F:/reacttask/src/container/Store/index";
+import { Provider } from "react-redux";
+
 function App() {
   return (
-    <div class="container" style={{ height: "100%" }}>
-      <Topic />
-      <MainImg />
-      <TicketBook />
-      <TripPlanner />
-    </div>
+    <Provider store={store}>
+      <div class="container" style={{ height: "100%" }}>
+        <Topic />
+        <MainImg />
+        <TicketBook />
+        <TripPlanner />
+        <BootsrapExample />
+      </div>
+    </Provider>
   );
 }
 
@@ -54,6 +62,7 @@ function NavBtn(props) {
     <button
       type="button"
       style={{ backgroundColor: "white", border: "0px white", outline: "0" }}
+      key={props.name}
     >
       <h5>{props.name}</h5>
     </button>
@@ -82,60 +91,6 @@ function MainImg() {
           bibendum metus.
         </h5>
       </div>
-    </div>
-  );
-}
-
-function TicketBook() {
-  return (
-    <div style={{ display: "flex" }}>
-      {TicketDetails.map((e) => (
-        <div style={{ margin: "auto" }}>
-          <TicketHeader header={e.header} />
-          <DropDown list={e.list} mainList={e.mainList} />
-        </div>
-      ))}
-      <div style={{ margin: "auto" }}>
-        <button
-          type="button"
-          style={{
-            backgroundColor: "orange",
-            outline: "0",
-            width: "100px",
-            height: "100px",
-          }}
-        >
-          Book Now
-        </button>
-      </div>
-    </div>
-  );
-}
-function TicketHeader(props) {
-  return <div style={{ fontSize: "10" }}>{props.header}</div>;
-}
-function DropDown(props) {
-  return (
-    <div class="dropdown">
-      <button
-        style={{ backgroundColor: "white", border: "0px white", outline: "0" }}
-        class=" dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        {props.mainList}
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {props.list.map((e) => (
-          <li>
-            <a class="dropdown-item" href="#">
-              {e}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
